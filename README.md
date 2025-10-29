@@ -13,7 +13,6 @@ When Dijkstra's algorithm is used to find the shortest path between two nodes in
 The two implementations of Dijkstra's algorithm compared here use a proiority queue and a linked list to find the next vertex to visit. The linked list implementation linearly searches the list of unvisited nodes to find the next one to visit. Very rough pseudocode for these algorithms are provided below:
 
 ### Dijkstra's Algorithm
-Here is pseudocode for Dijkstra's algorithm.
 ```
 let nodes = every node in the graph
     start = the start node
@@ -34,12 +33,8 @@ while (n ≠ end)
   n = the next node to visit
 }
 ```
-The inner for loop always runs **N** times (N = total # of nodes). This could be optimized by only checking nodes that are adjacent to n, but it would still have the same time complexity for a worse case graph.
-
-The number of times the outer while loop runs depends on the method for finding the next node to visit.
 
 ### Priority Queue
-
 ```
 let queue = a priority queue of nodes, sorted by their current calculated distFromStart
 
@@ -56,12 +51,8 @@ while ( )
   n = queue.pop()
 }
 ```
-In the worse case, the while loop will run **E** times (E = total # of edges) before it visits the end node. This is because the same node can get pushed multiple times into queue if multiple edges connect to it.
-
-``queue.push()`` and ``queue.pop()`` each have time complexity **O[log(E)]** in the worse case; there will never be more than E nodes in the queue. If you thought it should be O[log(N)], remember that the queue might have the same node twice in it. The real limiting factor on the number of nodes in queue is E.
 
 ### Linear Search
-
 ```
 let list = a linked list of nodes that haven't been visited yet
 
@@ -85,12 +76,8 @@ while ( )
   list.remove(nextN)
 }
 ```
-This version of Dijkstra's algorithm will never visit the same node twice, so the outer while loop won't run more than N.
-
-The time complexity of finding the next node in the list is simply **O[N]**, since it involves checking every node in the graph in the worse case. The ``list.remove()`` is constant time in the actual code, since it takes an iterator already pointing to the element to remove.
 
 ### Time complexity
-
 There are two ways to look at time complexity for these algorithms, worse case in a general graph (N nodes, E edges), or worse case with the very worse case graph (N nodes and approximately N × N edges, a fully connected graph!). In a general graph, the priority queue algorithm seems to have a slightly worse time complexity??? I thought it would be better:
 
 #### Priority Queue: 
@@ -108,6 +95,10 @@ while ( )   -- runs E times
   n = queue.pop()   -- O[log[E]]
 }
 ```
+In the worse case, the while loop will run **E** times (E = total # of edges) before it visits the end node. This is because the same node can get pushed multiple times into queue if multiple edges connect to it.
+
+``queue.push()`` and ``queue.pop()`` each have time complexity **O[log(E)]** in the worse case; there will never be more than E nodes in the queue. If you thought it should be O[log(N)], remember that the queue might have the same node twice in it. The real limiting factor on the number of nodes in queue is E.
+
 E × (log(E) × N + log(E)) ≈ **O[E*N*log(E)]**
 
 #### Linear Search:
@@ -134,16 +125,19 @@ while ( )   -- runs N times
   list.remove(nextN)   -- O[1]
 }
 ```
+This version of Dijkstra's algorithm will never visit the same node twice, so the outer while loop won't run more than N.
+
+The time complexity of finding the next node in the list is simply **O[N]**, since it involves checking every node in the graph in the worse case. The ``list.remove()`` is constant time in the actual code, since it takes an iterator already pointing to the element to remove.
+
 N × (N + N + 1) ≈ **O[N<sup>2</sup>]**
 
-With a worse case graph, all of the nodes are connected by edges, so E ≈ N × N. Substituting E for N<sup>2</sup> into the equations, we see that the time complexity of the linear search algorithm is actually better than the priority queue one when for a worse case graph:
+With a worse case graph, all of the nodes are connected by edges, so E = N × (N - 1) ≈ N × N. Substituting E for N<sup>2</sup> into the equations, we see that the time complexity of the linear search algorithm is actually better than the priority queue one when for a worse case graph:
 
 Priority Queue: **O[N<sup>3</sup>log(N)]**
 
 Linear Search: **O[N<sup>2</sup>]**
 
 ## Results
-
 //TODO
 
 ## Author
