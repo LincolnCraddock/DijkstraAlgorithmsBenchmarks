@@ -60,7 +60,10 @@ while ( )
 {
   for each ( )
   {
-      ...
+      if ( )
+      {
+        ...
+      }
   }
 
   let nextN = UNDEFINED
