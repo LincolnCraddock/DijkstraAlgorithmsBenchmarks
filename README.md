@@ -10,10 +10,10 @@ The releases section includes several executables:
 ## Background
 When Dijkstra's algorithm is used to find the shortest path between two nodes in a graph, each node is 'visited' once, starting with the start node. Visiting a node means relaxing each of its neighbors' distances from the start, if possible. The next node to visit is always the closest unvisited node to the start as calculated by the algorithm so far. There are several ways to determine the next node to visit, but these benchmarks were designed to compare two of them.
 
-The two implementations of Dijkstra's algorithm compared here use a proiority queue and a linked list to find the next vertex to visit. The linked list implementation linearly searches the list of unvisited nodes to find the next one to visit. Very rough sudo code for these algorithms are provided below:
+The two implementations of Dijkstra's algorithm compared here use a proiority queue and a linked list to find the next vertex to visit. The linked list implementation linearly searches the list of unvisited nodes to find the next one to visit. Very rough pseudocode for these algorithms are provided below:
 
 ### Dijkstra's Algorithm
-Here is sudocode for Dijkstra's algorithm.
+Here is pseudocode for Dijkstra's algorithm.
 ```
 let nodes = every node in the graph
     start = the start node
@@ -26,7 +26,7 @@ while (n ≠ end)
 {
   for each (n2 in nodes)
   {
-    if (edges[n][n2] is defined && n.distFromStart + edges[n][n2] < v2.distFromStart)
+    if (edges[n][n2] is defined && n.distFromStart + edges[n][n2] < n2.distFromStart)
     {
       relax n2.distFromStart
     }
@@ -41,7 +41,7 @@ The number of times the outer while loop runs depends on the method for finding 
 ### Priority Queue
 
 ```
-let queue = a priority queue of nodes, organized by their current calculated distFromStart
+let queue = a priority queue of nodes, sorted by their current calculated distFromStart
 
 while ( )
 {
@@ -99,9 +99,9 @@ while ( )   -- runs E times
 {
   for each ( )   -- runs N times
   {
-    if ( )
+    if ( )   -- evaluates true N × N times
     {
-      ...
+      ...   -- O[1]
       queue.push(n2)   -- O[log(E)]
     }
   }
@@ -118,7 +118,10 @@ while ( )   -- runs N times
 {
   for each ( )   -- runs N times
   {
-      ...
+    if ( )   -- evaluates true N × N times
+    {
+      ...   -- O[1]
+    }
   }
 
   let nextN = UNDEFINED
