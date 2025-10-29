@@ -75,8 +75,7 @@ while ( )
     }
   }
 
-  n = nextN
-  list.remove(nextN)
+  n = list.remove(nextN)
 }
 ```
 
