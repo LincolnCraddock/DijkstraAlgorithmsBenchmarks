@@ -1,6 +1,12 @@
 # DijkstraAlgorithmsBenchmark
 A few drivers, header files, and unit tests for benchmarking the runtime efficiency of two different implementations of Dijkstra's algorithm.
 
+## Run the benchmarks
+To run the benchmarks and see this for yourself, download the executables from the releases section and run each of the executables:
+- BenchmarkDijkstraAlgorithms
+- Driver
+- TestDijkstraAlgorithms
+
 ## Background
 When Dijkstra's algorithm is used to find the shortest path between two nodes in a graph, each node is 'visited' once, starting with the start node. Visiting a node means relaxing each of its neighbors' distances from the start, if possible. The next node to visit is always the closest unvisited node to the start as calculated by the algorithm so far. There are several ways to determine the next node to visit, but these benchmarks were designed to compare two of them.
 
@@ -129,13 +135,8 @@ N × (N + N + 1) ≈ **O[N<sup>2</sup>]**
 With a worse case graph, all of the nodes are connected by edges, so E ≈ N × N. Substituting E for N<sup>2</sup> into the equations, we see that the time complexity of the linear search algorithm is actually better than the priority queue one when for a worse case graph:
 
 Priority Queue: **O[N<sup>3</sup>log(N)]**
+
 Linear Search: **O[N<sup>2</sup>]**
-
-## Run the benchmarks
-To run the benchmarks and see this for yourself, download the complete folder and compile:
-
-``g++ -std=c++17 -Wall -Wextra -I. BenchmarkDijkstraAlgorithms.cpp -o BenchmarkDijkstraAlgorithms -lCatch2Main -lCatch2``
-- Run the produced executable to see how ... //TODO
 
 ## Results
 
