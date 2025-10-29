@@ -1,8 +1,8 @@
 # DijkstraAlgorithmsBenchmark
 A few drivers, header files, and unit tests for benchmarking the runtime efficiency of two different implementations of Dijkstra's algorithm.
 
-## Run the benchmarks
-To run the benchmarks and see this for yourself, download the executables from the releases section and run each of the executables:
+## Run
+The releases section includes several executables:
 - BenchmarkDijkstraAlgorithms
 - Driver
 - TestDijkstraAlgorithms
