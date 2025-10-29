@@ -18,16 +18,17 @@ Here is sudocode for Dijkstra's algorithm.
 let nodes = every node in the graph
     start = the start node
     end = the end node
-    edges[n1][n2] = the length of the edge between node n1 and n2 (or UNDEFINED if there is no edge)
+    edges[n1][n2] = the length of the edge between node n1 and n2
+                    (or UNDEFINED if there is no edge)
 
 let n = start
 while (n ≠ end)
 {
   for each (n2 in nodes)
   {
-    if (edges[n][n2] is defined && n.distanceFromStart + edges[n][n2] < v2.distanceFromStart)
+    if (edges[n][n2] is defined && n.distFromStart + edges[n][n2] < v2.distFromStart)
     {
-      relax n2.distanceFromStart
+      relax n2.distFromStart
     }
   }
   n = the next node to visit
@@ -40,7 +41,7 @@ The number of times the outer while loop runs depends on the method for finding 
 ### Priority Queue
 
 ```
-let queue = a priority queue of nodes, organized by their current calculated distanceFromStart
+let queue = a priority queue of nodes, organized by their current calculated distFromStart
 
 while ( )
 {
@@ -74,7 +75,7 @@ while ( )
   let nextN = UNDEFINED
   for each (n2 in list)
   {
-    if (n2.distanceFromStart < nextN.distanceFromStart)
+    if (n2.distFromStart < nextN.distFromStart)
     {
       nextN = n2
     }
@@ -94,17 +95,17 @@ There are two ways to look at time complexity for these algorithms, worse case i
 
 #### Priority Queue: 
 ```
-while ( ) -- runs E times
+while ( )   -- runs E times
 {
-  for each ( ) -- runs N times
+  for each ( )   -- runs N times
   {
     if ( )
     {
       ...
-      queue.push(n2) -- O[log(E)]
+      queue.push(n2)   -- O[log(E)]
     }
   }
-  n = queue.pop() -- O[log[E]]
+  n = queue.pop()   -- O[log[E]]
 }
 ```
 E × (log(E) × N + log(E)) ≈ **O[E*N*log(E)]**
@@ -113,21 +114,21 @@ E × (log(E) × N + log(E)) ≈ **O[E*N*log(E)]**
 ```
 let list = a linked list of nodes that haven't been visited yet
 
-while ( ) -- runs N times
+while ( )   -- runs N times
 {
-  for each ( ) -- runs N times
+  for each ( )   -- runs N times
   {
       ...
   }
 
   let nextN = UNDEFINED
-  for each ( ) -- O[N]
+  for each ( )   -- O[N]
   {
     ...
   }
 
   n = nextN
-  list.remove(nextN) -- O[1]
+  list.remove(nextN)   -- O[1]
 }
 ```
 N × (N + N + 1) ≈ **O[N<sup>2</sup>]**
