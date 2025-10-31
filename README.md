@@ -4,7 +4,7 @@ A few drivers, header files, and unit tests for benchmarking the runtime efficie
 ## Run
 The releases section includes several executables:
 - Driver
-- BenchmarkTypicalGraphs
+- BenchmarkRandomGraphs
 - BenchmarkWorseCaseGraphs
 - Tests
 
@@ -85,7 +85,7 @@ while ( )
 ```
 
 ## Time complexity
-There are at least two ways to measure time complexity for Dijkstra's algorithm: the worse case in a typical graph (N nodes, A arcs), or the worse case with the very worse possible graph (N nodes and approximately N × N arcs, a fully connected graph!). In a typical graph, the priority queue algorithm seems to have a much better time complexity:
+There are at least two ways to measure time complexity for Dijkstra's algorithm: the worse case in a completely random graph (N nodes, A arcs), or the worse case with the very worse possible graph (N nodes and approximately N × N arcs, a fully connected graph!). In a random graph, the priority queue algorithm seems to have a much better time complexity:
 
 ### Priority Queue
 ```
@@ -148,7 +148,7 @@ Priority Queue in a worse case graph: **O[N<sup>2</sup> log(N)]**
 Linear Search in a worse case graph: **O[N<sup>2</sup>]**
 
 ## Results
-### Typical Graph
+### Random Graph
 | Graph Size | With Priority Queue | With Linear Search |
 | ---------: | :------------------ | :----------------- |
 |   10 nodes | 0.0112203 ms        | 0.00562637 ms      |
