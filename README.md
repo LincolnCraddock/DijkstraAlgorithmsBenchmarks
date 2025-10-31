@@ -151,7 +151,7 @@ Linear Search in a worse case graph: **O[N<sup>2</sup>]**
 ### Typical Graph
 | Graph Size | With Priority Queue | With Linear Search |
 | ---------: | :------------------ | :----------------- |
-|   10 nodes | 0.00719351 ms       | 0.0105804 ms       |
+|   10 nodes | 0.0112203 ms        | 0.00562637 ms      |
 |  100 nodes | 0.234808 ms         | 0.34385 ms         |
 |  500 nodes | 4.29251 ms          | 7.51058 ms         |
 | 1000 nodes | 17.5654 ms          | 30.5001 ms         |
@@ -159,10 +159,10 @@ Linear Search in a worse case graph: **O[N<sup>2</sup>]**
 ### Worse Case Graph
 | Graph Size | With Priority Queue | With Linear Search |
 | ---------: | :------------------ | :----------------- |
-|   10 nodes | 0.0075127 ms        | 0.00807918 ms      |
-|  100 nodes | 1.39027 ms          | 0.231624 ms        |
-|  500 nodes | 136.027 ms          | 4.72565 ms         |
-| 1000 nodes | ???????? ms         | 19.5796 ms         |
+|   10 nodes | 0.0182991 ms        | 0.00991817 ms      |
+|  100 nodes | 1.39027 ms          | 0.465639 ms        |
+|  500 nodes | 136.027 ms          | 10.7225 ms         |
+| 1000 nodes | ???????? ms         | ??????? ms         |
 
 ## Author
 Lincoln Craddock
