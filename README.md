@@ -162,7 +162,7 @@ Linear Search in a worse case graph: **O[N<sup>2</sup>]**
 |   10 nodes | 0.0182991 ms        | 0.00991817 ms      |
 |  100 nodes | 5.83757 ms          | 0.465639 ms        |
 |  500 nodes | 43.1003 ms          | 10.7225 ms         |
-| 1000 nodes | ???????? ms         | ??????? ms         |
+| 1000 nodes | ???????? ms         | 43.9528 ms         |
 
 ## Author
 Lincoln Craddock
