@@ -180,7 +180,7 @@ The execution time of both algorithms on randomly generated and worse case graph
 |  500 nodes | 43.1003 ms          | 10.7225 ms         |
 | 1000 nodes | ???????? ms         | 43.9528 ms         |
 
-These times were gethered by running the Driver on an Intel(R) Xeon(R) Gold 6230 CPU (2.10GHz) running Arch Linux. Although the exact runtimes of these algorithms may vary from machine to machine, these results clearly show how the implementation with a priority queue outperforms the implementation with a linear search for random graphs no matter the size of graph, but is much worse at evaluating graphs in the worse case for especially large graphs.
+These times were gethered by running the Driver on an Intel(R) Xeon(R) Gold 6230 CPU (2.10GHz) running Arch Linux. Although the exact runtimes of these algorithms may vary from machine to machine, these results clearly show how the implementation with a priority queue outperforms the implementation with a linear search for randomly generated graphs, but is much slower in the very worse case.
 
 ## Author
 Lincoln Craddock
