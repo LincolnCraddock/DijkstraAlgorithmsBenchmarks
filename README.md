@@ -1,11 +1,6 @@
 # DijkstraAlgorithmsBenchmarks
 A few drivers, header files, and unit tests for benchmarking the runtime efficiency of two different implementations of Dijkstra's algorithm.
 
-## Background
-Using Dijkstra's algorithm to find the shortest path between two nodes in a graph involves 'visiting' a number of nodes, starting with the start node. Visiting a node means relaxing each of its neighbors' distances from the start as calculated by the algorithm so far. The next node to visit is determined by finding the closest unvisited node to the start. There are several different ways to find the next node, and it isn't obvious which is best, so these benchmarks were designed to compare two of them.
-
-The two implementations of Dijkstra's algorithm tested here use a proiority queue and a linked list respectively to find the next vertex to visit. The linked list implementation linearly searches the list of unvisited nodes to find the next one to visit. Very rough pseudocode for these algorithms are provided below.
-
 ## Run
 The releases section includes several executables:
 - Driver
@@ -20,7 +15,7 @@ Run the **Driver** with the name of the algorithm to test, either `priority-queu
 Average Time (sample size 2000): 5.83037 ms
 ```
 
-If you want to get the the runtime of every execution rather than just the average, running **RunDriver.sh** with `-t <number of times to run>` will call the Driver `<number of times to run>` times and print only the runtimes. For example, you could concatenate the runtime of every execution of the above test into a file and then average those results like this:
+If you want to get the the runtime of every execution rather than just the average, running **RunDriver.sh** with `-t <number of times to run>` will call the Driver `<number of times to run>` times and print only the runtimes. For example, you could concatenate the runtime of every execution from the above test into a file and then average those results like this:
 ```
 > ./RunDriver.sh -t 2000 -a priority-queue -g worse-case -n 100 > results.txt
 > awk '{sum+=$1} END {print sum/NR}' results.txt
@@ -28,6 +23,11 @@ If you want to get the the runtime of every execution rather than just the avera
 ```
 
 Two benchmarks are also included for measuring the performance of both algorithms using Catch2, **BenchmarkRandomGraphs** and **BenchmarkWorseCaseGraphs**. Running these programs runs both algorithms against various sized random and worse case graphs, respectively. You can also run numerous test cases to verify the correctness of both implemnentations of Dijkstra's algorithm by running **Tests**.
+
+## Background
+Using Dijkstra's algorithm to find the shortest path between two nodes in a graph involves 'visiting' a number of nodes, starting with the start node. Visiting a node means relaxing each of its neighbors' distances from the start as calculated by the algorithm so far. The next node to visit is determined by finding the closest unvisited node to the start. There are several different ways to find the next node, and it isn't obvious which is best, so these benchmarks were designed to compare two of them.
+
+The two implementations of Dijkstra's algorithm tested here use a proiority queue and a linked list respectively to find the next vertex to visit. The linked list implementation linearly searches the list of unvisited nodes to find the next one to visit. Very rough pseudocode for these algorithms are provided below.
 
 ## Algorithms
 ### Dijkstra's Algorithm
@@ -162,6 +162,8 @@ Priority Queue in a worse case graph: **O[N<sup>2</sup> log(N)]**
 Linear Search in a worse case graph: **O[N<sup>2</sup>]**
 
 ## Results
+The execution time of both algorithms was measured for random and worse case graphs of various sizes. There average runtimes of 5000 samples for each graph type, size, and algorithm are shown below.
+
 ### Random Graph
 | Graph Size | With Priority Queue | With Linear Search |
 | ---------: | :------------------ | :----------------- |
@@ -177,6 +179,8 @@ Linear Search in a worse case graph: **O[N<sup>2</sup>]**
 |  100 nodes | 5.83757 ms          | 0.465639 ms        |
 |  500 nodes | 43.1003 ms          | 10.7225 ms         |
 | 1000 nodes | ???????? ms         | 43.9528 ms         |
+
+These times were gethered by running the Driver on an Intel(R) Xeon(R) Gold 6230 CPU (2.10GHz) running Arch Linux. Although exact times may vary from machine to machine, it can be clearly seen that the implementation using the priority queue outperforms the implementation doing a linear search on random graphs no matter the size of graph, but is much worse at evaluating graphs in the worse case at especially high graph sizes.
 
 ## Author
 Lincoln Craddock
