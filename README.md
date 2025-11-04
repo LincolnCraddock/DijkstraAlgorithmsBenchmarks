@@ -4,11 +4,25 @@ A few drivers, header files, and unit tests for benchmarking the runtime efficie
 ## Run
 The releases section includes several executables:
 - Driver
+- RunDriver.sh
 - BenchmarkRandomGraphs
 - BenchmarkWorseCaseGraphs
 - Tests
 
-The Driver can be used to
+Run the **Driver** with the name of the algorithm to test, either `priority-queue` or `linear-search`. It will evaluate a random 250-node graph with that algorithm and print the runtime. You can also specify a number of samples to average, the kind of graph to evaluate (either `worse-case` or `random`), the number of nodes in each graph, and the seed to seed the RNG with (if evaluating a random graph). For example, to measure the average runtime of the priroity queue algorithm on a worse case graph of 100 nodes after 2000 samples, you could run:
+```
+> ./Driver priority-queue 2000 worse-case 100
+Average Time (sample size 2000): 5.83037 ms
+```
+
+If you want to get the the runtime of every execution rather than just the average, running **RunDriver.sh** with `-t <number of times to run>` will call the Driver `<number of times to run>` times and print only the runtimes. For example, you could concatenate the runtime of every execution of the above test into a file and then average those results like this:
+```
+> ./RunDriver.sh -t 2000 -a priority-queue -g worse-case -n 100 > results.txt
+> awk '{sum+=$1} END {print sum/NR}' results.txt
+6.02261
+```
+
+Two benchmarks are also included for measuring the performance of both algorithms using Catch2, **BenchmarkRandomGraphs** and **BenchmarkWorseCaseGraphs**. Running these programs runs both algorithms against various sized random and worse case graphs, respectively. You can also run numerous test cases to verify the correctness of both implemnentations of Dijkstra's algorithm by running **Tests**.
 
 ## Background
 Using Dijkstra's algorithm to find the shortest path between two nodes in a graph involves 'visiting' a number of nodes, starting with the start node. Visiting a node means relaxing each of its neighbors' distances from the start as calculated by the algorithm so far. The next node to visit is determined by finding the closest unvisited node to the start. There are several different ways to find the next node, and it isn't obvious which is best, so these benchmarks were designed to compare two of them.
