@@ -162,7 +162,7 @@ Priority Queue in a worse case graph: **O[N<sup>2</sup> log(N)]**
 Linear Search in a worse case graph: **O[N<sup>2</sup>]**
 
 ## Results
-The execution time of both algorithms was measured for random and worse case graphs of various sizes. There average runtimes of 5000 samples for each graph type, size, and algorithm are shown below.
+The execution time of both algorithms on randomly generated and worse case graphs of various sizes was measured. The average runtimes over 5000 sample executions for each graph type, size, and algorithm are shown below.
 
 ### Random Graph
 | Graph Size | With Priority Queue | With Linear Search |
@@ -180,7 +180,7 @@ The execution time of both algorithms was measured for random and worse case gra
 |  500 nodes | 43.1003 ms          | 10.7225 ms         |
 | 1000 nodes | ???????? ms         | 43.9528 ms         |
 
-These times were gethered by running the Driver on an Intel(R) Xeon(R) Gold 6230 CPU (2.10GHz) running Arch Linux. Although exact times may vary from machine to machine, it can be clearly seen that the implementation using the priority queue outperforms the implementation doing a linear search on random graphs no matter the size of graph, but is much worse at evaluating graphs in the worse case at especially high graph sizes.
+These times were gethered by running the Driver on an Intel(R) Xeon(R) Gold 6230 CPU (2.10GHz) running Arch Linux. Although the exact runtimes of these algorithms may vary from machine to machine, these results clearly show how the implementation with a priority queue outperforms the implementation with a linear search for random graphs no matter the size of graph, but is much worse at evaluating graphs in the worse case for especially large graphs.
 
 ## Author
 Lincoln Craddock
