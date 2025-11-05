@@ -15,10 +15,10 @@ Run the **Driver** with the name of the algorithm to test, either `priority-queu
 Average Time (sample size 2000): 5.83037 ms
 ```
 
-If you want to get the the runtime of every execution rather than just the average, running **RunDriver.sh** with `-t <number of times to run>` will call the Driver `<number of times to run>` times and print only the runtimes. For example, you could concatenate the runtime of every execution from the above test into a file and then average those results like this:
+If you want to get the the runtime of every execution rather than just the average, running **RunDriver.sh** with `-t <number of times to run>` will call the Driver `<number of times to run>` times and print only the runtimes in ms. For example, you could concatenate the runtime of every execution from the above test into a file and then average those results like this:
 ```
 > ./RunDriver.sh -t 2000 -a priority-queue -g worse-case -n 100 > results.txt
-> awk '{sum+=$1} END {print sum/NR}' results.txt
+> awk '{sum+=$1} END {print sum/NR " ms"}' results.txt
 6.02261
 ```
 
@@ -167,17 +167,17 @@ The execution time of both algorithms on randomly generated and worse case graph
 ### Random Graph
 | Graph Size | With Priority Queue | With Linear Search |
 | ---------: | :------------------ | :----------------- |
-|   10 nodes | 0.0012881 ms        | 0.00149163 ms      |
-|  100 nodes | 0.0543846 ms        | 0.0575774 ms       |
+|   10 nodes | 0.00183514 ms       | 0.00152738 ms      |
+|  100 nodes | 0.055432  ms        | 0.0623508 ms       |
 |  500 nodes | 1.16839 ms          | 1.24221 ms         |
 | 1000 nodes | 5.37895 ms          | 5.98022 ms         |
 
 ### Worse Case Graph
 | Graph Size | With Priority Queue | With Linear Search |
 | ---------: | :------------------ | :----------------- |
-|   10 nodes | ????????? ms        | ?????????? ms      |
-|  100 nodes | ??????? ms          | ???????? ms        |
-|  500 nodes | ??????? ms          | ??????? ms         |
+|   10 nodes | 0.00135783 ms       | 0.000797853 ms     |
+|  100 nodes | 0.429064 ms         | 0.0422763 ms       |
+|  500 nodes | 31.0799 ms          | 0.73142 ms         |
 | 1000 nodes | ???????? ms         | ??????? ms         |
 
 These times were gethered by compiling the Driver with -O3 optimizations and running it on an Intel(R) Xeon(R) Gold 6230 CPU (2.10GHz) running Arch Linux. Although exact runtimes may vary from machine to machine, these results clearly show how the implementation using a priority queue outperforms the implementation using a linear search for randomly generated graphs, but is much slower in the worse case scenario.
