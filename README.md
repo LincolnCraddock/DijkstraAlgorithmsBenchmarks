@@ -153,7 +153,7 @@ Unlike the priority queue implementation, this version of Dijkstra's algorithm w
 
 The time complexity of finding the next node in the list is **O[N]**, since it involves checking every node in the graph in the worse case. The ``list.remove()`` is constant time in the code, since it takes an iterator already pointing to the element to remove.
 
-N × (N + N + 1) ≈ **O[N<sup>2</sup>]**
+A + N × (N + 1) ≈ **O[N<sup>2</sup>]**
 
 With a worse case graph, each node has an arc going to and from every other node in the graph, so A = N × (N - 1) ≈ N × N. Substituting A with N<sup>2</sup> into the time complexity equation for the priority queue algorithm, we see that its time complexity is actually worse than the linear search algorithm in a worse case graph:
 
