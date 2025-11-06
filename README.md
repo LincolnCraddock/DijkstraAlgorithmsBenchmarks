@@ -15,10 +15,10 @@ Run the **Driver** with the name of the algorithm to test, either `priority-queu
 Average Time (sample size 2000): 5.83037 ms
 ```
 
-If you want to get the the runtime of every execution rather than just the average, running **RunDriver.sh** with `-t <number of times to run>` will call the Driver `<number of times to run>` times and print only the runtimes. For example, you could concatenate the runtime of every execution from the above test into a file and then average those results like this:
+If you want to get the the runtime of every execution rather than just the average, running **RunDriver.sh** with `-t <number of times to run>` will call the Driver `<number of times to run>` times and print only the runtimes in ms. For example, you could concatenate the runtime of every execution from the above test into a file and then average those results like this:
 ```
 > ./RunDriver.sh -t 2000 -a priority-queue -g worse-case -n 100 > results.txt
-> awk '{sum+=$1} END {print sum/NR}' results.txt
+> awk '{sum+=$1} END {print sum/NR " ms"}' results.txt
 6.02261
 ```
 
@@ -153,7 +153,7 @@ Unlike the priority queue implementation, this version of Dijkstra's algorithm w
 
 The time complexity of finding the next node in the list is **O[N]**, since it involves checking every node in the graph in the worse case. The ``list.remove()`` is constant time in the code, since it takes an iterator already pointing to the element to remove.
 
-N × (N + N + 1) ≈ **O[N<sup>2</sup>]**
+A + N × (N + 1) ≈ **O[N<sup>2</sup>]**
 
 With a worse case graph, each node has an arc going to and from every other node in the graph, so A = N × (N - 1) ≈ N × N. Substituting A with N<sup>2</sup> into the time complexity equation for the priority queue algorithm, we see that its time complexity is actually worse than the linear search algorithm in a worse case graph:
 
@@ -162,25 +162,27 @@ Priority Queue in a worse case graph: **O[N<sup>2</sup> log(N)]**
 Linear Search in a worse case graph: **O[N<sup>2</sup>]**
 
 ## Results
-The execution time of both algorithms was measured for random and worse case graphs of various sizes. There average runtimes of 5000 samples for each graph type, size, and algorithm are shown below.
+The execution time of both algorithms on randomly generated and worse case graphs of various sizes was measured. The average runtimes over 50,000 sample executions for each graph type, size, and algorithm are shown below.
 
 ### Random Graph
 | Graph Size | With Priority Queue | With Linear Search |
 | ---------: | :------------------ | :----------------- |
-|   10 nodes | 0.0112203 ms        | 0.00562637 ms      |
-|  100 nodes | 0.234808 ms         | 0.34385 ms         |
-|  500 nodes | 4.29251 ms          | 7.51058 ms         |
-| 1000 nodes | 17.5654 ms          | 30.5001 ms         |
+|   10 nodes | 0.00149273 ms       | 0.00172045 ms      |
+|  100 nodes | 0.0564334 ms        | 0.0604695 ms       |
+|  500 nodes | 1.14905 ms          | 1.32704 ms         |
+| 1000 nodes | 5.57145 ms          | 5.97749 ms         |
 
 ### Worse Case Graph
 | Graph Size | With Priority Queue | With Linear Search |
 | ---------: | :------------------ | :----------------- |
-|   10 nodes | 0.0182991 ms        | 0.00991817 ms      |
-|  100 nodes | 5.83757 ms          | 0.465639 ms        |
-|  500 nodes | 43.1003 ms          | 10.7225 ms         |
-| 1000 nodes | ???????? ms         | 43.9528 ms         |
+|   10 nodes | 0.00144939 ms       | 0.00088914 ms      |
+|  100 nodes | 0.425032 ms         | 0.0389728 ms       |
+|  500 nodes | 31.4694 ms          | 0.734609 ms        |
+| 1000 nodes | ???????? ms         | 3.15329 ms         |
 
-These times were gethered by running the Driver on an Intel(R) Xeon(R) Gold 6230 CPU (2.10GHz) running Arch Linux. Although exact times may vary from machine to machine, it can be clearly seen that the implementation using the priority queue outperforms the implementation doing a linear search on random graphs no matter the size of graph, but is much worse at evaluating graphs in the worse case at especially high graph sizes.
+These times were gethered by compiling the Driver with -O3 optimizations and running it on an Intel(R) Xeon(R) Gold 6230 CPU (2.10GHz) running Arch Linux. Although exact runtimes may vary from machine to machine, these results clearly show how the implementation using a priority queue outperforms the implementation using a linear search for especially large randomly generated graphs, but becomes much slower in the worse case scenario.
+
+Interestingly, the data shows that worse case graphs have much lower average runtimes when using linear search, and with priority queue on very small graphs. Profiling suggests that this is not due to increased heap usage or algorithmic inefficiency in the implementations themselves. Instead, the difference is likely due to the less predictable memory access and branch behavior when processing randomly connected graphs, which causes more CPU stalls even though the total number of operations is smaller.
 
 ## Author
 Lincoln Craddock
