@@ -167,20 +167,22 @@ The execution time of both algorithms on randomly generated and worse case graph
 ### Random Graph
 | Graph Size | With Priority Queue | With Linear Search |
 | ---------: | :------------------ | :----------------- |
-|   10 nodes | 0.00183514 ms       | 0.00152738 ms      |
-|  100 nodes | 0.055432  ms        | 0.0623508 ms       |
-|  500 nodes | 1.16839 ms          | 1.24221 ms         |
-| 1000 nodes | 5.37895 ms          | 5.98022 ms         |
+|   10 nodes | 0.00149273 ms       | 0.00172045 ms      |
+|  100 nodes | 0.0564334 ms        | 0.0604695 ms       |
+|  500 nodes | 1.14905 ms          | 1.32704 ms         |
+| 1000 nodes | 5.57145 ms          | 5.97749 ms         |
 
 ### Worse Case Graph
 | Graph Size | With Priority Queue | With Linear Search |
 | ---------: | :------------------ | :----------------- |
-|   10 nodes | 0.00135783 ms       | 0.000797853 ms     |
-|  100 nodes | 0.429064 ms         | 0.0422763 ms       |
-|  500 nodes | 31.0799 ms          | 0.73142 ms         |
-| 1000 nodes | ???????? ms         | ??????? ms         |
+|   10 nodes | 0.00144939 ms       | 0.00088914 ms      |
+|  100 nodes | 0.425032 ms         | 0.0389728 ms       |
+|  500 nodes | 31.4694 ms          | 0.734609 ms        |
+| 1000 nodes | ???????? ms         | 3.15329 ms         |
 
-These times were gethered by compiling the Driver with -O3 optimizations and running it on an Intel(R) Xeon(R) Gold 6230 CPU (2.10GHz) running Arch Linux. Although exact runtimes may vary from machine to machine, these results clearly show how the implementation using a priority queue outperforms the implementation using a linear search for randomly generated graphs, but is much slower in the worse case scenario.
+These times were gethered by compiling the Driver with -O3 optimizations and running it on an Intel(R) Xeon(R) Gold 6230 CPU (2.10GHz) running Arch Linux. Although exact runtimes may vary from machine to machine, these results clearly show how the implementation using a priority queue outperforms the implementation using a linear search for especially large randomly generated graphs, but becomes much slower in the worse case scenario.
+
+Interestingly, the data shows that worse case graphs have much lower average runtimes when using linear search, and with priority queue on very small graphs. Profiling suggests that this is not due to increased heap usage or algorithmic inefficiency in the implementations themselves. Instead, the difference is likely due to the less predictable memory access and branch behavior when processing randomly connected graphs, which causes more CPU stalls even though the total number of operations is smaller.
 
 ## Author
 Lincoln Craddock
