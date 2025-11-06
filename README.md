@@ -24,6 +24,8 @@ If you want to get the the runtime of every execution rather than just the avera
 
 Two benchmarks are also included for measuring the performance of both algorithms using Catch2, **BenchmarkRandomGraphs** and **BenchmarkWorseCaseGraphs**. Running these programs runs both algorithms against various sized random and worse case graphs, respectively. You can also run numerous test cases to verify the correctness of both implemnentations of Dijkstra's algorithm by running **Tests**.
 
+To compile the code for yourself, clone the repository and run ``make`` from the project directory.
+
 ## Background
 Using Dijkstra's algorithm to find the shortest path between two nodes in a graph involves 'visiting' a number of nodes, starting with the start node. Visiting a node means relaxing each of its neighbors' distances from the start as calculated by the algorithm so far. The next node to visit is determined by finding the closest unvisited node to the start. There are several different ways to find the next node, and it isn't obvious which is best, so these benchmarks were designed to compare two of them.
 
