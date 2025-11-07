@@ -24,7 +24,7 @@ If you want to get the the runtime of every execution rather than just the avera
 
 Two benchmarks are also included for measuring the performance of both algorithms using Catch2, **BenchmarkRandomGraphs** and **BenchmarkWorseCaseGraphs**. Running these programs runs both algorithms against various sized random and worse case graphs, respectively. You can also run numerous test cases to verify the correctness of both implemnentations of Dijkstra's algorithm by running **Tests**.
 
-To compile the code for yourself, clone the repository and run ``make`` from the project directory.
+To compile the code for yourself, clone the repository and run ``make`` from the project directory. You will need [Catch2](https://github.com/Tombarr/open-source-words.git) installed to compile BenchmarkRandomGraphs, BenchmarkWorseCaseGraphs, and Tests.
 
 ## Background
 Using Dijkstra's algorithm to find the shortest path between two nodes in a graph involves 'visiting' a number of nodes, starting with the start node. Visiting a node means relaxing each of its neighbors' distances from the start as calculated by the algorithm so far. The next node to visit is determined by finding the closest unvisited node to the start. There are several different ways to find the next node, and it isn't obvious which is best, so these benchmarks were designed to compare two of them.
@@ -184,7 +184,7 @@ The execution time of both algorithms on randomly generated and worse case graph
 
 These times were gethered by compiling the Driver with -O3 optimizations and running it on an Intel(R) Xeon(R) Gold 6230 CPU (2.10GHz) running Arch Linux. Although exact runtimes may vary from machine to machine, these results clearly show how the implementation using a priority queue outperforms the implementation using a linear search for especially large randomly generated graphs, but becomes much slower in the worse case scenario.
 
-Interestingly, the data shows that worse case graphs have much lower average runtimes when using linear search, and with priority queue on very small graphs. Profiling suggests that this is not due to increased heap usage or algorithmic inefficiency in the implementations themselves. Instead, the difference is likely due to the less predictable memory access and branch behavior when processing randomly connected graphs, which causes more CPU stalls even though the total number of operations is smaller.
+Interestingly, the data shows that worse case graphs have much lower average runtimes than random graphs when using linear search, or priority queues on very small graphs. Profiling suggests that this is not due to increased heap usage or algorithmic inefficiency in the implementations themselves. Instead, the difference is likely due to the less predictable memory access and branch behavior when processing randomly connected graphs, which causes more CPU stalls even though the total number of operations is smaller.
 
 ## Author
 Lincoln Craddock
